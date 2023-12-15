@@ -6,7 +6,7 @@ module.exports = async (req, res) => {
         });
         if (user != null && user) {
             console.log(user.dob);
-            res.render('gTest', { userId: req.session.userId, usertype: req.session.usertype, user: user });
+            res.render('gtest', { userId: req.session.userId, usertype: req.session.usertype, user: user });
         }
     }
     catch (error) {
