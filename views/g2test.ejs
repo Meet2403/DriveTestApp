@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('layout/head'); -%>
+
+    <body class="d-flex flex-column">
+        <main class="flex-shrink-0">
+            <!-- Navigation-->
+            <%- include('layout/navigation'); -%>
+                <!-- Page content-->
+                <section class="">
+                    <div class="container px-5">
+                        <!-- Contact form-->
+                        <div class="bg-light rounded-3 py-5 px-4 px-md-5 mb-5">
+                            <div class="text-center mb-5">
+                                <h1 class="fw-bolder">G2 Test</h1>
+                            </div>
+                            <% if (typeof message=='string' && message){ %>
+                                <div class="text-center mb-5">
+                                    <h2>
+                                        <%= message %>
+                                            </h3>
+                                </div>
+                                <% } %>
+                                    <div class="row gx-5 justify-content-center">
+                                        <div class="col-lg-6 col-xl-8">
+                                            <% if (typeof user=='object' && user){ %>
+                                                <form id="g2TestForm" action="/g2test/create" method="POST">
+                                                    <div class="text-center mb-5">
+                                                        <h1 class="fw-bolder">Personal Details</h1>
+                                                    </div>
+                                                    <!-- Name input-->
+                                                    <div class="form-floating mb-3">
+                                                        <input class="form-control" id="firstname" name="firstname"
+                                                            type="text" value="<%= user.firstname %>" />
+                                                        <label for="firstname">First Name</label>
+                                                    </div>
+                                                    <div class="form-floating mb-3">
+                                                        <input class="form-control" id="lastname" name="lastname"
+                                                            type="text" value="<%= user.lastname %>" />
+                                                        <label for="lastname">Last Name</label>
+                                                    </div>
+                                                    <div class="form-floating mb-3">
+                                                        <input class="form-control" id="age" name="age" type="text"
+                                                            value="<%= user.age %>" />
+                                                        <label for="age">Age</label>
+                                                    </div>
+                                                    <div class="form-floating mb-3">
+                                                        <input class="form-control" id="dob" name="dob" type="date"
+                                                            value="<%= user.dob %>" />
+                                                        <label for="dob">Dob</label>
+                                                    </div>
+                                                    <div class="form-floating mb-3">
+                                                        <input class="form-control" id="licensenumber"
+                                                            name="licensenumber" type="text"
+                                                            value="<%= user.licensenumber %>" />
+                                                        <label for="license">License Number</label>
+                                                    </div>
+                                                    <div class="text-center mb-5">
+                                                        <h1 class="fw-bolder">Car Details</h1>
+                                                    </div>
+                                                    <div class="form-floating mb-3">
+                                                        <input class="form-control" id="make" name="make" type="text"
+                                                            value="<%= user.car_details.make %>" />
+                                                        <label for="make">Make</label>
+                                                    </div>
+                                                    <div class="form-floating mb-3">
+                                                        <input class="form-control" id="model" name="model" type="text"
+                                                            value="<%= user.car_details.model %>" />
+                                                        <label for="make">Model</label>
+                                                    </div>
+                                                    <div class="form-floating mb-3">
+                                                        <input class="form-control" id="year" name="year" type="text"
+                                                            value="<%= user.car_details.year %>" />
+                                                        <label for="year">Year</label>
+                                                    </div>
+                                                    <div class="form-floating mb-3">
+                                                        <input class="form-control" id="platno" name="platno"
+                                                            type="text" value="<%= user.car_details.platno %>" />
+                                                        <label for="platno">Plate Number</label>
+                                                    </div>
+                                                    <div class="form-floating mb-3">
+                                                        <input class="form-control" id="id" name="id" type="text"
+                                                            value="<%= user.id %>" hidden />
+
+                                                    </div>
+                                                    <div class="d-none" id="submitSuccessMessage">
+                                                        <div class="text-center mb-3">
+                                                            <div class="fw-bolder">Form submission successful!</div>
+                                                            To activate this form, sign up at
+                                                            <br />
+                                                            <a
+                                                                href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Submit error message-->
+                                                    <!---->
+                                                    <!-- This is what your users will see when there is-->
+                                                    <!-- an error submitting the form-->
+                                                    <div class="d-none" id="submitErrorMessage">
+                                                        <div class="text-center text-danger mb-3">Error sending message!
+                                                        </div>
+                                                    </div>
+                                                    <!-- Submit Button-->
+                                                    <div class="d-grid"><button class="btn btn-primary btn-lg"
+                                                            id="updateButton" type="submit">Update</button></div>
+                                                </form>
+                                                <% } else {%>
+                                                    <form id="g2TestForm" action="/g2test/create" method="POST">
+                                                        <div class="mb-3">
+                                                            <h3 class="fw-bolder">Enter Personal Information</h3>
+                                                        </div>
+                                                        <!-- First Name input-->
+                                                        <div class="form-floating mb-3">
+                                                            <input class="form-control" id="firstname" type="text"
+                                                                placeholder="Enter your First Name..." name="firstname"
+                                                                required />
+                                                            <label for="firstname">First name</label>
+                                                            <div class="invalid-feedback"
+                                                                data-sb-feedback="firstname:required">First
+                                                                Name is required.</div>
+                                                        </div>
+                                                        <!-- Last Name input-->
+                                                        <div class="form-floating mb-3">
+                                                            <input class="form-control" id="lastname" type="text"
+                                                                placeholder="Enter your Last Name..." name="lastname"
+                                                                required />
+                                                            <label for="lastname">Last name</label>
+                                                            <div class="invalid-feedback"
+                                                                data-sb-feedback="lastname:required">Last Name
+                                                                is required.</div>
+                                                        </div>
+                                                        <!-- License Number input-->
+                                                        <div class="form-floating mb-3">
+                                                            <input class="form-control" id="licensenumber" type="text"
+                                                                placeholder="Enter your License Number..."
+                                                                name="licensenumber" required />
+                                                            <label for="licensenumber">License Number</label>
+                                                            <div class="invalid-feedback"
+                                                                data-sb-feedback="licensenumber:required">
+                                                                License Number is required.</div>
+                                                        </div>
+                                                        <!-- Age input-->
+                                                        <div class="form-floating mb-3">
+                                                            <input class="form-control" id="age" type="number"
+                                                                placeholder="Enter your Age..." name="age" required />
+                                                            <label for="age">Age</label>
+                                                            <div class="invalid-feedback"
+                                                                data-sb-feedback="age:required">Age is
+                                                                required.</div>
+                                                        </div>
+                                                        <!-- Date of birth input-->
+                                                        <div class="form-floating mb-3">
+                                                            <input class="form-control" id="dob" type="date"
+                                                                placeholder="Enter your Date Of Birth..." name="dob"
+                                                                required />
+                                                            <label for="dob">Dob</label>
+                                                        </div>
+
+                                                        <div class="mb-3">
+                                                            <h3 class="fw-bolder">Enter Car Information</h3>
+                                                        </div>
+                                                        <!-- Car Make-->
+                                                        <div class="form-floating mb-3">
+                                                            <input class="form-control" id="make" type="text"
+                                                                placeholder="Enter Car Make..." name="make" required />
+                                                            <label for="make">Make</label>
+                                                            <div class="invalid-feedback"
+                                                                data-sb-feedback="make:required">Car make is
+                                                                required.</div>
+                                                        </div>
+                                                        <!-- Car Model-->
+                                                        <div class="form-floating mb-3">
+                                                            <input class="form-control" id="model" type="text"
+                                                                placeholder="Enter Model..." name="model" required />
+                                                            <label for="model">Model</label>
+                                                            <div class="invalid-feedback"
+                                                                data-sb-feedback="model:required">Model is
+                                                                required.</div>
+                                                        </div>
+                                                        <!-- Car Year-->
+                                                        <div class="form-floating mb-3">
+                                                            <input class="form-control" id="year" type="text"
+                                                                placeholder="Enter Year..." name="year" required />
+                                                            <label for="year">Year</label>
+                                                            <div class="invalid-feedback"
+                                                                data-sb-feedback="year:required">Year is
+                                                                required.</div>
+                                                        </div>
+                                                        <!-- Car Plate Number-->
+                                                        <div class="form-floating mb-3">
+                                                            <input class="form-control" id="platno" type="text"
+                                                                placeholder="Enter Plate Number..." name="platno"
+                                                                required />
+                                                            <label for="plate">Plate Number</label>
+                                                            <div class="invalid-feedback"
+                                                                data-sb-feedback="plate:required">Plate Number
+                                                                is required.</div>
+                                                        </div>
+                                                        <!-- Submit Button-->
+                                                        <div class="d-grid"><button class="btn btn-primary btn-lg"
+                                                                id="submitButton" type="submit">Submit</button></div>
+                                                    </form>
+                                                    <% }%>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <br>
+                                    <div class="row gx-5 justify-content-center">
+                                        <div class="col-lg-6 col-xl-8">
+                                            <form id="g2TestForm" action="/appointmentSearch" method="POST">
+                                                <div class="text-center mb-5">
+                                                    <h1 class="fw-bolder">Select Appointment</h1>
+                                                </div>
+                                                <!-- Name input-->
+                                                <div class="form-floating mb-3">
+                                                    <input class="form-control" id="date" name="date" type="date" />
+                                                    <label for="date">Date</label>
+                                                </div>
+                                                <div class="d-grid"><button class="btn btn-primary btn-lg"
+                                                        id="submitButton" type="submit">Search</button></div>
+                                            </form>
+                                        </div>
+                                    </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="">
+                    <div class="container px-5">
+                        <div class="bg-light rounded-3 py-5 px-md-5 mb-5">
+                            <div class="row gx-5 justify-content-center">
+                                <div class="col-lg-8 col-xl-6">
+                                    <% if (typeof appointments=='object' && appointments){ %>
+                                        <div class="text-center mb-5">
+                                            <h1 class="fw-bolder">Available Appointments</h1>
+                                        </div>
+                                        <% for (var i=0; i < appointments.length; i++) { %>
+
+                                            <form id="g2TestForm" action="/bookAppointment" method="POST">
+                                                <!-- <div class="row g-2"> -->
+                                                <!-- <div class="col-lg-1">
+                                                        <input type="radio" id="slot" name="slot" value="HTML">
+
+                                                    </div> -->
+                                                <div class="col-md">
+                                                    <div class="form-floating mb-3">
+
+                                                        <input class="form-control" id="date" name="date" type="text"
+                                                            value="<%= appointments[i].date %>" disabled />
+                                                        <label for="firstname">Date</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md">
+                                                    <div class="form-floating mb-3">
+                                                        <input class="form-control" id="time" name="time" type="text"
+                                                            value="<%= appointments[i].time %>" disabled />
+                                                        <label for="lastname">Time</label>
+                                                        <input id="id" name="id" type="text"
+                                                            value="<%= appointments[i]._id %>" hidden />
+                                                    </div>
+                                                </div>
+
+                                                <div class="d-grid"><button class="btn btn-primary btn-lg"
+                                                        id="submitButton" type="submit">Book</button>
+                                                </div><br>
+                                            </form>
+                                            <!-- </div> -->
+                                            <% } %>
+
+                                                <% } %>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="">
+                    <div class="container px-5">
+                        <div class="bg-light rounded-3 py-5 px-md-5 mb-5">
+                            <div class="row gx-5 justify-content-center">
+                                <div class="col-lg-8 col-xl-6">
+                                    <% if ((typeof user=='object' && user) && (typeof user.comment_G2=='string' &&
+                                        user.comment_G2 || typeof user.result_G2=='string' && user.result_G2)){ %>
+                                        <div class="text-center mb-5">
+                                            <h1 class="fw-bolder">Examiner Comments and Result</h1>
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <input class="form-control" id="comment" name="comment" type="text"
+                                                value="<%= user.comment_G2 %>" disabled />
+                                            <label for="Comment">Examiner Comments</label>
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <input class="form-control" id="result" name="result" type="result"
+                                                value="<%= user.result_G2 %>" disabled />
+                                            <label for="Result">Result</label>
+                                        </div>
+
+                                        <% } %>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+                    </div>
+                    </div>
+                    </div>
+                </section>
+        </main>
+        <!-- Footer-->
+        <%- include('layout/footer'); -%>
+            <!-- Bootstrap core JS-->
+            <!-- Core theme JS-->
+            <%- include('layout/script'); -%>
+    </body>
+
+</html>

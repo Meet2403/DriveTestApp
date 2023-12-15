@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('layout/head'); -%>
+
+    <body class="d-flex flex-column">
+        <main class="flex-shrink-0">
+            <!-- Navigation-->
+            <%- include('layout/navigation'); -%>
+                <!-- Page content-->
+                <section class="py-5">
+                    <div class="container px-5">
+                        <div class="bg-light rounded-3 py-5 px-4 px-md-5 mb-5">
+                            <div class="row gx-5 justify-content-center">
+                                <div class="col-lg-8 col-xl-6">
+                                    <form id="searchDriverForm" action="/search" method="POST">
+                                        <div class="text-center mb-5">
+                                            <% if (typeof message=='string' && message){ %>
+                                                <div class="text-center mb-5">
+                                                    <h2>
+                                                        <%= message %>
+                                                            </h3>
+                                                </div>
+                                                <% } %>
+                                                    <h1 class="fw-bolder">Select Test Type</h1>
+                                        </div>
+                                        <!-- Name input-->
+                                        <div class="row g-2">
+                                            <div class="col-md">
+                                                <div class="form-floating mb-3">
+                                                    <select id="test_type" class="dropdown-toggle form-control"
+                                                        name="test_type" required>
+                                                        <option value="G2">G2</option>
+                                                        <option value="G">G</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md">
+                                                <div class="d-grid"><button class="btn btn-primary btn-lg" id="Search"
+                                                        type="submit">Search</button></div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <% if (typeof users=='object' && users){ %>
+                    <% for (var i=0; i < users.length; i++) { %>
+                        <section class="">
+                            <div class="container px-1">
+                                <div class="bg-light rounded-3 py-5 px-md-5 mb-5">
+                                    <div class="row gx-10 justify-content-center">
+                                        <div class="col-lg-10 col-xl-10">
+                                            <form id="g2TestForm" action="/updateCommentsandResult" method="POST">
+                                                <div class="grid-container-exam">
+                                                    <div class="form-floating mb-3">
+                                                        <input class="form-control" id="name" name="name" type="text"
+                                                            value="<%= users[i].firstname + ' ' + users[i].lastname %> "
+                                                            disabled />
+                                                        <label for="firstname">Name</label>
+                                                    </div>
+                                                    <div class="form-floating mb-3 w+100">
+                                                        <input class="form-control" id="cardetails" name="cardetails"
+                                                            type="text"
+                                                            value="<%= users[i].car_details.make + ', ' + users[i].car_details.model + ', ' + users[i].car_details.year + ', ' + users[i].car_details.platno %> "
+                                                            disabled />
+                                                        <label for="details">Make, Model, Year, Plateno</label>
+                                                        <input class="form-control" id="_id" name="_id" type="text"
+                                                            value="<%=users[i]._id%>" hidden />
+                                                        <input class="form-control" id="test_type" name="test_type"
+                                                            type="text" value="<%=users[i].test_type%>" hidden />
+                                                    </div>
+                                                    
+                                                    <% if (typeof users[i].test_type=='string' && users[i].test_type == 'G2') { %>
+                                                        <div class="form-floating mb-3">
+                                                            <input class="form-control" id="comment" name="comment" required
+                                                                value="<%= users[i].comment_G2%>" type="text" />
+                                                            <label for="comment">Comment</label>
+                                                        </div>
+                                                        <div class="form-floating mb-3">
+                                                        <% if (typeof users[i].result_G2=='string' &&
+                                                            (users[i].result_G2=='Pass' || users[i].result_G2=='Fail' )){ %>
+                                                            <select id="result" class="dropdown-toggle form-control"
+                                                                name="result" disabled>
+                                                                <option value="Default">
+                                                                    <%= users[i].result_G2 %>
+                                                                </option>
+                                                                <% } else { %>
+                                                                    <select id="result"
+                                                                        class="dropdown-toggle form-control"
+                                                                        name="result" required>
+                                                                        <option value="Default"></option>
+                                                                        <option value="Pass">Pass</option>
+                                                                        <option value="Fail">Fail</option>
+                                                                        <% } %>
+
+                                                                    </select>
+                                                                    <label for="result">Result</label>
+                                                    </div>
+                                                    <% } %>
+                                                    <% if (typeof users[i].test_type=='string' && users[i].test_type == 'G') { %>
+                                                        <div class="form-floating mb-3">
+                                                            <input class="form-control" id="comment" name="comment" required
+                                                                value="<%= users[i].comment_G%>" type="text" />
+                                                            <label for="comment">Comment</label>
+                                                        </div>
+                                                        <div class="form-floating mb-3">
+                                                        <% if (typeof users[i].result_G=='string' &&
+                                                            (users[i].result_G=='Pass' || users[i].result_G=='Fail' )){ %>
+                                                            <select id="result" class="dropdown-toggle form-control"
+                                                                name="result" disabled>
+                                                                <option value="Default">
+                                                                    <%= users[i].result_G %>
+                                                                </option>
+                                                                <% } else { %>
+                                                                    <select id="result"
+                                                                        class="dropdown-toggle form-control"
+                                                                        name="result" required>
+                                                                        <option value="Default"></option>
+                                                                        <option value="Pass">Pass</option>
+                                                                        <option value="Fail">Fail</option>
+                                                                        <% } %>
+
+                                                                    </select>
+                                                                    <label for="result">Result</label>
+                                                    </div>
+                                                    <% } %>
+                                                    <div class="d-grid grid-item-5"><button
+                                                            class="btn btn-primary btn-md " id="submitButton"
+                                                            type="submit">Update Result and Comment</button>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <!-- </div> -->
+                        <% } %>
+                            <% } %>
+
+        </main>
+        <!-- Footer-->
+        <%- include('layout/footer'); -%>
+            <!-- Bootstrap core JS-->
+            <!-- Core theme JS-->
+            <%- include('layout/script'); -%>
+    </body>
+
+</html>
